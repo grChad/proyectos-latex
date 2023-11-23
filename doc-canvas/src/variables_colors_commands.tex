@@ -1,0 +1,82 @@
+\renewcommand*{\familydefault}{\sfdefault} % Para que el texto sea mas bonito
+
+% Colores
+\definecolor{blue_lua}{RGB}{0, 153, 221} % Color personalizado para el Titulo
+\definecolor{base}{RGB}{48, 52, 70}
+\definecolor{pink}{RGB}{195, 66, 147}
+\definecolor{comment}{RGB}{118, 126, 152}
+\definecolor{flamingo}{RGB}{238, 190, 190}
+\definecolor{maroon}{RGB}{204, 133, 136}
+\definecolor{green}{RGB}{40, 180, 40}
+\definecolor{yellow}{RGB}{250, 200, 20}
+\definecolor{red}{RGB}{220, 30, 30}
+\definecolor{orange}{RGB}{229, 83, 45}
+\definecolor{blue}{RGB}{8, 120, 192}
+
+% Para insertar codigo en linea
+\newcommand{\textblue}[1]{\textcolor{blue_lua}{#1}}
+\newcommand{\lineCode}[1]{\colorbox{gray!20}{\textcolor{black!90}{\texttt{#1}}}}
+\newcommand{\code}[1]{\textcolor{pink!50!black}{\texttt{#1}}}
+\newcommand{\textjs}[1]{\textcolor{yellow}{\textbf{#1}}}
+\newcommand{\texthtml}[1]{\textcolor{orange}{\textbf{#1}}}
+\newcommand{\textcss}[1]{\textcolor{blue}{\textbf{#1}}}
+\newcommand{\taghtml}[1]{\textcolor{red}{\texttt{#1}}}
+
+% Item personalizado usando el cuadrado del paquete "amssymb"
+\NewDocumentCommand{\listCustom}{m}{%
+	\item[\hspace{2.5mm}$\scriptstyle\textcolor{black!70}{\blacksquare}$\hspace{3mm}{#1}]%
+}
+
+
+% Configuración general para mostrar código
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{gray!7},
+	keywordstyle=\color{pink}, % Estilo para las palabras clave
+	commentstyle=\color{comment}\textit, % Estilo para los comentarios
+	stringstyle=\color{green}, % Estilo para las cadenas de texto
+	identifierstyle=\color{black!80},
+	basicstyle=\color{maroon}\ttfamily,
+	frame=none,
+	breakatwhitespace=false,
+	breaklines=true,
+	keepspaces=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2,
+}
+
+\lstdefinestyle{mystyle2}{
+	backgroundcolor=\color{gray!7},
+	keywordstyle=\color{red}, % Estilo para las palabras clave
+	commentstyle=\color{comment}\textit, % Estilo para los comentarios
+	stringstyle=\color{green}, % Estilo para las cadenas de texto
+	identifierstyle=\color{black!80},
+	basicstyle=\color{teal}\ttfamily,
+	frame=none,
+	breakatwhitespace=false,
+	breaklines=true,
+	keepspaces=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=3,
+}
+
+\lstdefinelanguage{TypeScript}{
+	keywords={break, case, catch, class, const, let, continue, debugger, default, delete, do, else, enum, export, extends, false, finally, for, function, if, import, in, instanceof, new, null, return, super, switch, this, throw, true, try, typeof, var, void, while, with},
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	morestring=[b]",
+	morestring=[b]'
+}
+
+% Definición del lenguaje HTML
+\lstdefinelanguage{HTML}{
+	sensitive=true,
+	keywords={html, head, canvas, title, meta, link, script, style, body, h1, h2, h3, p, div, span, a, img, ul, li, ol, table, tr, td, th },
+	otherkeywords={<, >, /},
+	morecomment=[s]{<!--}{-->},
+	morestring=[b]',
+	morestring=[b]",
+}

@@ -1,0 +1,35 @@
+% paquetes para el documento
+\input{./src/packages}
+\graphicspath{{./assets/}}
+
+% Variables, colores y comandos
+\input{./src/variables_colors_commands}
+
+% NOTE: ---------------------------------[INICIO]---------------------------------
+\begin{document}
+
+Por \textit{Jesús Gabriel Rivera}
+
+En \faGithub \hspace{0.1cm} Github como \lineCode{\textit{grChad}}
+
+Me he basado en información proporcionada por MDN (Mozilla Developer Network).
+
+\hrulefill % Línea horizontal
+\vspace{0.5cm} % space
+
+\begin{center}
+	\huge\textbf{\textblue{Tutorial de Canvas}}
+	\vspace{0.5cm} % space
+
+	\includegraphics[width=9cm]{logo-canvas} % Logo de Lua
+	\vspace{0.5cm} % space
+\end{center}
+
+\taghtml{\textless canvas\textgreater} es un elemento \texthtml{HTML} el cual puede ser usado para dibujar gráficos usando \code{scripts} (normalmente \textjs{JavaScript}). Este puede, por ejemplo, ser usado para dibujar gráficos, realizar composición de fotos simples (y no tan simples) animaciones.
+
+En este tutorial se describe cómo usar el elemento \taghtml{\textless canvas\textgreater} para dibujar gráficos en 2D, empezando con lo básico. Los ejemplos le proveerán mayor claridad a las ideas que pueda tener referentes al \code{canvas}, así como los códigos que necesita para crear su propio contenido.
+
+\input{./src/section_01} % Primera sección
+\input{./src/section_02} % Segunda sección
+
+\end{document}

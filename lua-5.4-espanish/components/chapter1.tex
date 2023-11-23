@@ -1,0 +1,17 @@
+% NOTE: Primer capitulo
+
+\chapter{Introducción}
+% \addcontentsline{toc}{chapter}{1 - Introducción}
+% \setcounter{page}{1} % definir manualmente el numero de magina
+
+Lua es un lenguaje de scripting poderoso, eficiente, liviano e integrable. Admite programación procedural, programación orientada a objetos, programación funcional, programación basada en datos y descripción de datos.
+
+Lua combina una sintaxis procedural simple con potentes constructos de descripción de datos basados en arreglos asociativos y semánticas extensibles. Lua es de tipado dinámico, se ejecuta interpretando bytecode con una máquina virtual basada en registros y cuenta con una gestión automática de memoria con recolección de basura generacional, lo que lo hace ideal para configuración, scripting y prototipado rápido.
+
+Lua se implementa como una biblioteca escrita en un \texthigh{C} limpio, que es un subconjunto común de \texthigh{C} estándar y \texthigh{C++}. La distribución de Lua incluye un programa principal llamado "lua", que utiliza la biblioteca Lua para ofrecer un intérprete de Lua completo e independiente, ya sea para uso interactivo o por lotes. Lua está diseñado para ser utilizado tanto como un lenguaje de scripting poderoso, liviano e integrable para cualquier programa que lo necesite, como un lenguaje independiente poderoso, liviano y eficiente.
+
+Como lenguaje de extensión, Lua no tiene noción de un programa "principal": trabaja integrado en un cliente hospedante, llamado programa de integración o simplemente el hospedante. (Frecuentemente, este hospedante es el programa independiente "lua".) El programa hospedante puede invocar funciones para ejecutar un fragmento de código Lua, puede escribir y leer variables Lua y puede registrar funciones en C para ser llamadas por código Lua. A través del uso de funciones en C, Lua puede ser ampliado para abordar una amplia gama de dominios diferentes, creando así lenguajes de programación personalizados que comparten un marco sintáctico.
+
+Lua es software libre y se proporciona sin garantías, como se establece en su licencia. La implementación descrita en este manual está disponible en el sitio web oficial de Lua, www.lua.org.
+
+Al igual que cualquier otro manual de referencia, este documento puede resultar técnico en algunos lugares. Para obtener información sobre las decisiones detrás del diseño de Lua, consulte los documentos técnicos disponibles en el sitio web de Lua. Para obtener una introducción detallada a la programación en Lua, consulte el libro de Roberto, "Programming in Lua".

@@ -1,0 +1,120 @@
+\documentclass[12pt, openany]{book}
+
+\input{./components/packages} % packages
+\graphicspath{{./assets/images/}}
+
+% Variables, colores y commandos
+\input{./components/variables-colors-commands}
+
+% % Personalizar el formato de los capítulos en la tabla de contenido
+\titlecontents{chapter}
+[0pt] % Margen izquierdo
+{\vspace{10pt}\bfseries} % Formato del título de capítulo
+{\contentslabel[\thecontentslabel]{10pt}} % Formato de la etiqueta de capítulo
+{} % Espacio entre etiqueta y título
+{\hfill\contentspage} % Formato del número de página con puntos
+[\vspace{5pt}] % Espacio después de la entrada de la tabla de contenido
+
+
+% Personalizar los títulos de los capítulos
+\titleformat{\chapter}[display]
+{\normalfont\Huge\bfseries\color{blue_lua}} % Formato del capítulo
+{\bfseries\Large\itshape \thechapter} % format
+{20pt} % Espacio entre la etiqueta y el título
+{\Huge\color{blue_lua}} % Formato del título
+
+% Personalizar los titulos de las secciones
+\titleformat{\section}
+{\normalfont\Large\bfseries} % Formato de la sección
+{\color{blue!40!olive} \thesection} % Etiqueta de la sección
+{10pt} % Espacio entre la etiqueta y el título
+{\color{blue!40!olive}} % Formato del título
+
+
+% NOTE: -------------------[Inicion]--------------------------------------------
+\begin{document}
+
+
+% [Página 1 - Portada]---------------------------------------------------------
+\thispagestyle{empty}
+\begin{center}
+	\includegraphics[width=6cm]{logo-lua-intro} % Logo de Lua
+
+	\vspace{5mm}
+
+	{\Huge \textcolor{blue_lua}{\textbf{Manual de Referencia de}}}
+
+	{\Huge \textcolor{blue_lua}{\textbf{Lua 5.4}}}
+
+	\vspace{1cm}
+
+	Por Roberto Ierusalimschy, Luiz Henrique de Figueiredo y Waldemar Celes
+
+\end{center}
+
+\vfill
+
+\begin{center}
+	Copyright © 2020-2023 Lua.org, PUC-Rio. Disponible de forma gratuita bajo los términos de la licencia de Lua.
+\end{center}
+\newpage  % NOTE: para pasar a la siguiente pagina
+
+% [Página 2 - pagina en blanco]------------------------------------------------
+\thispagestyle{empty}
+\textcolor{white}{} % truco para tener la pagina en blanco
+\newpage  % NOTE: para pasar a la siguiente pagina
+
+% [Página 3]-------------------------------------------------------------------
+
+\thispagestyle{empty}
+
+\textbf{Traducido y Editado por:}
+
+Jesús Gabriel Rivera
+
+En GitHub como \lineCode{\textit{grChad}}
+
+\vspace{15mm}
+
+Esta obra incluye una traducción de la documentación original de Lua, junto con contenido adicional proporcionado por mi persona. Tanto la traducción como el contenido adicional se ofrecen bajo los mismos términos y condiciones que la licencia original de Lua.
+
+\newpage  % NOTE: para pasar a la siguiente pagina
+
+% [Página 4 - pagina en blanco]------------------------------------------------
+\thispagestyle{empty}
+\textcolor{white}{} % truco para tener la pagina en blanco
+\newpage  % NOTE: para pasar a la siguiente pagina
+
+% [Página 5 - Indice General]--------------------------------------------------
+\pagestyle{fancy}
+\tableofcontents
+\newpage  % NOTE: para pasar a la siguiente pagina
+
+% [ Página 8 - pagina en blanco]-----------------------------------------------
+\thispagestyle{empty}
+\textcolor{white}{} % truco para tener la pagina en blanco
+\newpage  % NOTE: para pasar a la siguiente pagina
+
+\input{./components/chapter1} % capitulo 1
+\input{./components/chapter2} % capitulo 2
+\input{./components/chapter3} % capitulo 3
+\input{./components/chapter4} % capitulo 4
+\input{./components/chapter5} % capitulo 5
+\input{./components/chapter6} % capitulo 6
+
+\chapter{Lua Independiente (Standalone)}
+
+\lipsum[1-3]
+
+\input{./components/chapter8} % capitulo 8
+
+\chapter{La Sintaxis Completa de Lua}
+\lipsum[1-3]
+
+
+\newpage  % NOTE: para pasar a la siguiente pagina
+\texthigh{Lua} y el logotipo de \texthigh{Lua} son marcas comerciales de Lua.org.
+
+Para obtener más información sobre \texthigh{Lua} y acceder a la documentación original de \texthigh{Lua}, visita: \textRef{http://www.lua.org/}
+
+\end{document}

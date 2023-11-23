@@ -1,0 +1,22 @@
+# LaTeX files
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.listing
+
+# Temporary files
+*~
+
+# Editor configuration files
+.vscode/
+.sublime-project
+.sublime-workspace
+
+# para tener registro de mi progreso y posibles cambios
+progress.md

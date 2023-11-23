@@ -1,0 +1,83 @@
+% Colores
+\definecolor{blue_lua}{RGB}{2,2,125} % Color personalizado para el Titulo
+\definecolor{base}{RGB}{48, 52, 70}
+\definecolor{pink}{RGB}{195, 66, 147}
+\definecolor{comment}{RGB}{165, 173, 206}
+\definecolor{flamingo}{RGB}{238, 190, 190}
+\definecolor{maroon}{RGB}{204, 133, 136}
+\definecolor{green}{RGB}{45, 194, 89}
+
+% Item personalizado usando el cuadrado del paquete "amssymb"
+\NewDocumentCommand{\listCustom}{m}{%
+	\item[\hspace{5mm}$\scriptstyle\textcolor{black!70}{\blacksquare}$\hspace{3mm}{#1}]%
+}
+
+% Para insertar codigo en linea
+\newcommand{\lineCode}[1]{\colorbox{gray!10}{\textcolor{black!80}{\texttt{#1}}}}
+\newcommand{\texthigh}[1]{\textcolor{black!75}{\texttt{#1}}}
+
+\newcommand{\keyword}[1]{\textcolor{pink}{\texttt{#1}}}
+
+% para destacar referencias
+\newcommand{\textRef}[1]{\textcolor{blue!80}{\texttt{#1}}}
+
+
+\renewcommand*{\familydefault}{\sfdefault} % Para que el texto sea mas bonito
+\renewcommand{\headrulewidth}{0pt} % el grosor del borde del encabezado
+
+
+% --------------------[config fancyhdr]-------------------------------------
+\fancyhf{} % cabezera y pie de pagina vacios
+% izquierdo y pares
+\fancyhead[LE]{\colorbox{gray!40}{\strut{\hspace{1mm}\thepage\hspace{1mm}}}\colorbox{black!70}{\strut{\hspace{1mm}\textcolor{white}{Capítulo \thechapter}\hspace{1mm}}}}
+
+% derecho y impares
+\fancyhead[RO]{\colorbox{black!70}{\strut{\hspace{1mm}\textcolor{white}{\nouppercase{\leftmark}\hspace{1mm}}}}\colorbox{gray!40}{\strut{\hspace{1mm}\thepage\hspace{1mm}}}}
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}} % para filtrar "Capítulo #" y quedarse con el nombre
+% ---------------------end fancyhdr ----------------------------------------
+
+% Configuración para el lenguaje Lua
+\lstdefinelanguage{Lua}{
+	keywords={and, break, do, else, elseif, end, false, for, function, if, in, local, nil, not, or, repeat, return, then, true, until, while},
+	sensitive=true,
+	comment=[l]{--},
+	string=[b]",
+	string=[b]',
+	morestring=[b]",
+	morestring=[b]',
+}
+
+% Configuración general para mostrar código
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{gray!7},
+	% keywordstyle=\color{pink}, % Estilo para las palabras clave
+	keywordstyle=\color{pink}\textbf,
+	commentstyle=\color{comment}, % Estilo para los comentarios
+	stringstyle=\color{green}, % Estilo para las cadenas de texto
+	% identifierstyle=\color{white},
+	identifierstyle=\color{black!80}\textit,
+	basicstyle=\color{maroon},
+	frame=none,
+	breakatwhitespace=false,
+	breaklines=true,
+	keepspaces=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=3,
+	% xleftmargin=10pt,                        % Margen izquierdo
+	% xrightmargin=10pt,                       % Margen derecho
+}
+
+% Definir el estilo personalizado para resaltar la sintaxis de una Terminal
+\lstdefinestyle{terminalstyle}{
+	basicstyle=\ttfamily\color{black!80},         % Estilo de fuente y color del texto
+	% backgroundcolor=\color{base},            % Color de fondo
+	frame=single,                             % Borde alrededor del contenido
+	xleftmargin=10pt,                        % Margen izquierdo
+	xrightmargin=10pt,                       % Margen derecho
+	breaklines=true,                         % Romper líneas largas
+	postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},  % Símbolo para líneas largas rotas
+	showstringspaces=false,                  % No mostrar espacios en cadenas
+}
