@@ -390,3 +390,427 @@ El resultado de todo ese código es el siguiente:
 		\filldraw[fill=black] (4, -8.5) circle (1) -- cycle; % center (4, -8.5); radius 1
 	\end{tikzpicture}
 \end{center}
+
+\newpage % nueva página
+\subsubsection{Curvas de Bézier y cuadráticas}
+
+El siguiente tipo de trayectorias disponibles son las Curvas de Bézier, disponibles en las variedades cúbica y cuadrática. Se utilizan generalmente para dibujar formas orgánicas complejas.
+
+\begin{description}
+	\listCustom{quadraticCurveTo(cp1x, cp1y, x, y):} Dibuja una curva cuadrática de Bézier desde la posición actual de la pluma hasta el punto final especificado por \textblue{x} e \textblue{y}, utilizando el punto de control especificado por \code{cp1x} y \code{cp1y}.
+
+	\listCustom{bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y):} Dibuja una curva cúbica de Bézier desde la posición actual de la pluma hasta el punto final especificado por \textblue{x} e \textblue{y}, utilizando los puntos de control especificados por (\code{cp1x}, \code{cp1y}) y (\code{cp2x}, \code{cp2y}).
+\end{description}
+\vspace{0.5cm} % separación vertical
+
+La diferencia entre ellas es que una curva de Bézier cuadrática tiene un punto inicial y otro final (puntos azules) y sólo un punto de control (indicado por el punto rojo) mientras que una curva de Bézier cúbica utiliza dos puntos de control.
+
+\vspace{5mm} % separación vertical
+\begin{center}
+	\begin{tikzpicture}
+		% Curva de Bézier cuadrática ---------------------------------------------
+		\draw[color=red!30] (0, 0) -- (1, 2); % linea de control
+		\draw[color=red!30] (1, 2) -- (4.5, 1); % linea de control
+
+		\draw[blue] (0,0) .. controls (1,2) .. (4.5,1);
+		\fill[red] (1, 2) circle (2pt); % Punto de control
+		\draw[fill=blue] (0,0) circle (2pt) (4.5, 1) circle (2pt); % Puntos inicial y final
+		\node[color=black] at (2.5, -0.5) {$curva\ cuadratica$}; % nombre de la curva
+
+		% Curva de Bézier cúbica ---------------------------------------------------
+		\draw[color=red!30] (6, 0) -- (7, 2); % linea de control
+		\draw[color=red!30] (9.5, 2) -- (10.5, 1); % linea de control
+
+		\draw[blue] (6,0) .. controls (7, 2) and (9.5, 2) .. (10.5 ,1);
+		\fill[red] (7,2) circle (2pt) (9.5, 2) circle (2pt); % Puntos de control
+		\draw[fill=blue] (6,0) circle (2pt) (10.5, 1) circle (2pt); % Puntos inicial y final
+		\node[color=black] at (8.5, -0.5) {$curva\ bezier$}; % nombre de la curva
+	\end{tikzpicture}
+\end{center}
+\vspace{5mm} % separación vertical
+
+Los parámetros \textblue{x} e \textblue{y} de estos dos métodos son las coordenadas del punto final. Los parámetros \code{cp1x} y \code{cp1y} son las coordenadas del primer punto de control, y \code{cp2x} y \code{cp2y} son las coordenadas del segundo punto de control.
+
+El uso de las curvas cuadráticas y cúbicas de Bézier puede ser un reto, porque a diferencia de los programas de dibujo vectorial como Adobe Illustrator, no tenemos información visual directa sobre lo que estamos haciendo. Esto hace que sea bastante difícil dibujar formas complejas. En el siguiente ejemplo, dibujaremos algunas formas orgánicas simples, pero si tienes tiempo y, sobre todo, paciencia, se pueden crear formas mucho más complejas.
+
+No hay nada muy difícil en estos ejemplos. En ambos casos vemos cómo se dibuja una sucesión de curvas que finalmente dan lugar a una forma completa.
+
+\newpage % saltar a la siguiente pagina
+\textbf{Curvas cuadráticas de Bézier}
+
+Este ejemplo utiliza múltiples curvas cuadráticas de Bézier para representar un comentario de voz.
+
+\vspace{0.5cm} % separación vertical
+\begin{lstlisting}[language=TypeScript, style=mystyle]
+  function draw() {
+    const canvas = document.getElementById("canvas");
+    if (canvas.getContext) {
+      const ctx = canvas.getContext("2d");
+
+      // Ejemplo de curvas cuadraticas
+      ctx.beginPath();
+      ctx.moveTo(75, 25);
+      ctx.quadraticCurveTo(25, 25, 25, 62.5);
+      ctx.quadraticCurveTo(25, 100, 50, 100);
+      ctx.quadraticCurveTo(50, 120, 30, 125);
+      ctx.quadraticCurveTo(60, 120, 65, 100);
+      ctx.quadraticCurveTo(125, 100, 125, 62.5);
+      ctx.quadraticCurveTo(125, 25, 75, 25);
+      ctx.stroke();
+    }
+  }
+\end{lstlisting}
+\vspace{0.5cm} % separación vertical
+
+El resultado se ve así:
+\begin{center}
+	\begin{tikzpicture}
+		\draw (0, -1) % forma de una idea de pregunta
+		.. controls (0.1, -0.5) and (0.5, 0)
+		.. (2, 0) .. controls (3.5, 0) and (3.9, -0.5)
+		.. (4, -1) .. controls (4.03, -1.25) .. (4, -1.5)
+		.. controls (3.9, -2) and (3.5, -2.5) .. (1.5, -2.5)
+		.. controls (1.5, -3) and (1, -3.5) .. (0.3, -3.5)
+		.. controls (1, -3.2) and (0.95, -3) .. (1, -2.5)
+		.. controls (0.01, -2.5) and (0.02, -1.5) .. (0, -1.5)
+		.. controls (-0.02, -1.25) .. (0, -1);
+	\end{tikzpicture}
+\end{center}
+
+\newpage % saltar a la siguiente pagina
+\textbf{Curvas cúbicas de Bézier}
+
+Este ejemplo dibuja un corazón utilizando curvas cúbicas de Bézier.
+
+\vspace{0.5cm} % separación vertical
+\begin{lstlisting}[language=TypeScript, style=mystyle]
+  function draw() {
+    const canvas = document.getElementById("canvas");
+    if (canvas.getContext) {
+      const ctx = canvas.getContext("2d");
+
+      // Ejemplo de curvas cubicas
+      ctx.beginPath();
+      ctx.moveTo(75, 40);
+      ctx.bezierCurveTo(75, 37, 70, 25, 50, 25);
+      ctx.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5);
+      ctx.bezierCurveTo(20, 80, 40, 102, 75, 120);
+      ctx.bezierCurveTo(110, 102, 130, 80, 130, 62.5);
+      ctx.bezierCurveTo(130, 62.5, 130, 25, 100, 25);
+      ctx.bezierCurveTo(85, 25, 75, 37, 75, 40);
+      ctx.fill();
+    }
+  }
+\end{lstlisting}
+
+El resultado se ve así:
+
+\begin{center}
+	\begin{tikzpicture}
+		\fill (3.75, 4) % forma de corazon
+		.. controls (3.75, 4.15) and (3.5, 4.75) .. (2.5, 4.75)
+		.. controls (1, 4.75) and (1, 2.875) .. (1, 2.875)
+		.. controls (1, 2) and (2, 0.9) .. (3.75, 0)
+		.. controls (5.5, 0.9) and (6.5, 2) .. (6.5, 2.875)
+		.. controls (6.5, 2.875) and (6.5, 4.75) .. (5, 4.75)
+		.. controls (4.25, 4.75) and (3.75, 4.15) .. (3.75, 4);
+	\end{tikzpicture}
+\end{center}
+
+\vspace{10mm} % separación vertical
+\subsubsection{Rectángulos}
+
+Además de los tres métodos que vimos en \textblue{Dibujar rectángulos (sub-sección 2.2)}, que dibujan formas rectangulares directamente en el \code{canvas}, existe también el método \code{rect()}, que añade un trazado rectangular a un trazado actualmente abierto.
+
+\begin{description}
+	\listCustom{rect(x, y, width, height):} Dibuja un rectángulo cuya esquina superior izquierda está especificada por (\textblue{x}, \textblue{y}) con el \code{width} y \code{height} especificados.
+\end{description}
+\vspace{5mm} % separación vertical
+
+Antes de que se ejecute este método, se llama automáticamente al método \code{moveTo()} con los parámetros (\textblue{x}, \textblue{y}). En otras palabras, la posición actual de la pluma se restablece automáticamente a las coordenadas por defecto.
+
+\newpage % saltar a la siguiente pagina
+\subsubsection{Hacer combinaciones}
+
+Hasta ahora, cada ejemplo de esta página ha utilizado sólo un tipo de función de trazado por forma. Sin embargo, no hay ninguna limitación en cuanto al número o los tipos de trazos que puedes utilizar para crear una forma. Así que en este último ejemplo, vamos a combinar todas las funciones de trazado para recrear el famoso juego de \textjs{Pacman}.
+
+Para los mas ansiosos, el resultado final seria este:
+
+\vspace{0.5cm} % space
+\begin{center}
+	\includegraphics[width=12cm]{game-pacman} % Logo de Lua
+\end{center}
+\vspace{0.5cm} % space
+
+Iniciamos este proyecto con el código \texthtml{HTML}.
+
+\begin{lstlisting}[language=HTML, style=mystyle2]
+  <html>
+    <body onload="draw();">
+      <canvas id="canvas" width="400" height="300"></canvas>
+    </body>
+  </html>
+\end{lstlisting}
+
+Dentro de la etiqueta \taghtml{\textless body\textgreater} usamos el atributo \code{onload} con el valor \code{draw()}. Esto para que se ejecute lo que esta dento de la funcion \code{draw()} dentro de \textjs{JavaScript}.
+
+Y para la etiqueta \taghtml{\textless canvas\textgreater} usamos el atributo \code{id} con el valor \code{canvas} y el atributo \code{width} con el valor \code{400} y \code{height} con el valor \code{300}. Esto significa que se creara un area de 400 x 300 para colocar tantos trazos como queramos.
+
+El \code{id} con valor \textcolor{green}{``canvas''}, se usa para poder hacer referencia a la etiqueta \taghtml{\textless canvas\textgreater} dentro del \textjs{JavaScript}.
+
+
+\newpage % saltar a la siguiente pagina
+Ahora el código en \textjs{JavaScript}
+
+\begin{lstlisting}[language=TypeScript, style=mystyle]
+  function draw() {
+    const canvas = document.getElementById('canvas');
+
+    if (canvas.getContext) {
+      const ctx = canvas.getContext('2d');
+
+      roundedRect(ctx, 10, 10, 380, 280, 15);
+      roundedRect(ctx, 15, 15, 370, 270, 12, 'black', true);
+
+      // bloques
+      roundedRect(ctx, 65, 65, 80, 40, 10);
+      roundedRect(ctx, 195, 65, 140, 40, 10);
+      roundedRect(ctx, 65, 155, 170, 40, 10);
+      roundedRect(ctx, 15, 245, 220, 40, 10);
+      roundedRect(ctx, 285, 155, 50, 80, 10);
+
+      // dibujando a Pacman
+      bodyPacman(ctx);
+      pupila(ctx, 45, 30, 'red');
+
+      // ruta para alcanzar la comida
+      horizontalRoute(ctx, 68, 39, 19);
+      horizontalRoute(ctx, 132, 131, 15);
+      horizontalRoute(ctx, 260, 259, 5);
+      verticalRoute(ctx, 164, 51, 5);
+      verticalRoute(ctx, 356, 51, 13);
+      verticalRoute(ctx, 260, 131, 9);
+
+      // cuerpo del fantasma naranja
+      bodyPhantom(ctx, 90, 145);
+      eyes(ctx, 98, 123);
+      pupila(ctx, 97, 126);
+      pupila(ctx, 109, 126);
+
+      // cuerpo del fantasma rojo
+      bodyPhantom(ctx, 340, 270, 'red');
+      eyes(ctx, 348, 248);
+      pupila(ctx, 348, 253);
+      pupila(ctx, 360, 253);
+    }
+  }
+\end{lstlisting}
+
+Creamos funciones auxiliares para dibujar las formas que vamos a utilizar. Hacemos esto para mantener el código mas ordenado, por legibilidad y para evitar la redundancia.
+
+\begin{description}
+	\listCustom{roundedRect():} Función para dibujar rectángulos redondeados.
+	\listCustom{bodyPacman():} Función para dibujar el cuerpo del Pacman.
+	\listCustom{pupila():} Función para dibujar la pupila de los personajes.
+	\listCustom{bodyPhantom():} Función para dibujar el cuerpo de los fantasmas.
+	\listCustom{eyes():} Función para dibujar los ojos de los fantasmas.
+	\listCustom{horizontalRoute():} Función para dibujar la ruta horizontal.
+	\listCustom{verticalRoute():} Función para dibujar la ruta vertical.
+\end{description}
+\vspace{0.5cm} % separación vertical
+
+A todas las funciones auxiliares, les pasamos atributos como \code{ctx}, \code{x}, \code{y} y \code{color}. Como los mas comunes, en el caso de \code{ctx} es el \code{canvas.getContext("2d")}. Solo es una forma de reciclar código.
+
+\vspace{0.5cm} % separación vertical
+La function \code{roundedRect()} dibuja un rectángulo redondeado. Entre los aspectos que se destaca, son el color de \code{fillStyle}; por defecto usa el color \textblue{blue}, pero si usas el parámetro \code{color}, puedes reemplazarlo por otro.
+
+\begin{lstlisting}[language=TypeScript, style=mystyle]
+  const roundedRect = (
+    ctx,
+    x,
+    y,
+    width,
+    height,
+    r,
+    color = 'blue',
+    stroke = false
+  ) => {
+    if (stroke) ctx.strokeStyle = '#4141CC';
+
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(x, y + r);
+    ctx.arcTo(x, y + height, x + r, y + height, r);
+    ctx.arcTo(x + width, y + height, x + width, y + height-r, r);
+    ctx.arcTo(x + width, y, x + width - r, y, r);
+    ctx.arcTo(x, y, x, y + r, r);
+    ctx.fill();
+    ctx.stroke();
+  };
+\end{lstlisting}
+\vspace{5mm} % separación vertical
+
+Por otro lado tenemos a la función \code{bodyPacman()} que dibuja el cuerpo de Pacman. El código es simple, con \code{fillStyle} igual a \textcolor{green}{``yellow''} se establece el color de relleno, los primeros 2 parámetros de \code{ctx.arc()} definen su posición y el tercero el radio que tendrá.
+
+\begin{lstlisting}[language=TypeScript, style=mystyle]
+  const bodyPacman = (ctx) => {
+    ctx.fillStyle = 'yellow';
+    ctx.beginPath();
+    ctx.arc(40, 40, 20, Math.PI / 7, -Math.PI / 7, false);
+    ctx.lineTo(45, 40);
+    ctx.fill();
+  };
+\end{lstlisting}
+
+\newpage % saltar a la siguiente pagina
+Para la función \code{bodyPhantom()} que es el cuerpo de los fantasmas, usa un color por defecto \textcolor{green}{``orange''} y también se puede cambiar si pasas un nuevo parámetro de color. Puedes crear tantos fantasmas como quieras, solo tienes que definir su posición con los ejes \textblue{x} y \textblue{y}.
+
+\begin{lstlisting}[language=TypeScript, style=mystyle]
+  const bodyPhantom = (ctx, x, y, color = 'orange') => {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x, y - 14);
+    ctx.bezierCurveTo(x, y - 22, x + 6, y - 28, x + 14, y - 28);
+    ctx.bezierCurveTo(x + 22, y - 28, x + 28, y - 22, x + 28, y - 14);
+    ctx.lineTo(x + 28, y);
+    ctx.lineTo(x + 23.333, y - 4.667);
+    ctx.lineTo(x + 18.666, y);
+    ctx.lineTo(x + 14, y - 4.667);
+    ctx.lineTo(x + 9.333, y);
+    ctx.lineTo(x + 4.666, y - 4.667);
+    ctx.lineTo(x, y);
+    ctx.fill();
+  };
+\end{lstlisting}
+
+\vspace{5mm} % separación vertical
+
+
+Las funciones \code{pupila()} y \code{eyes()} dibujan las pupilas y los ojos de los personajes. Los color de relleno son \textcolor{green}{``black''} y \textcolor{green}{``white''} correspondientemente. Todas las funciones se llaman usando los ejes de posición \textblue{x} y \textblue{y}, para evitar calcular toda la lógica que esto implica.
+
+\begin{lstlisting}[language=TypeScript, style=mystyle]
+  const pupila = function (ctx, x, y, color = 'black') {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, 2, 0, Math.PI * 2, true);
+    ctx.fill();
+  };
+
+  const eyes = function (ctx, x, y, color = 'white') {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.bezierCurveTo(x - 3, y, x - 4, y + 3, x - 4, y + 5);
+    ctx.bezierCurveTo(x - 4, y + 7, x - 3, y + 10, x, y + 10);
+    ctx.bezierCurveTo(x + 3, y + 10, x + 4, y + 7, x + 4, y + 5);
+    ctx.bezierCurveTo(x + 4, y + 3, x + 3, y, x, y);
+    ctx.moveTo(x + 12, y);
+    ctx.bezierCurveTo(x + 9, y, x + 8, y + 3, x + 8, y + 5);
+    ctx.bezierCurveTo(x + 8, y + 7, x + 9, y + 10, x + 12, y + 10);
+    ctx.bezierCurveTo(x + 15, y + 10, x + 16, y + 7, x + 16, y + 5);
+    ctx.bezierCurveTo(x + 16, y + 3, x + 15, y, x + 12, y);
+    ctx.fill();
+  };
+\end{lstlisting}
+
+\newpage % saltar a la siguiente pagina
+Para finalizar tenemos las funciones \code{horizontalRoute()} y \code{verticalRoute()} que dibujan las rutas horizontales y verticales. El color de relleno es \textcolor{green}{``white''}, los parámetros \textblue{x} y \textblue{y} indican su posición inicial y el parámetro \code{amount} la cantidad de veces que se repetirá con una separación de 16pt la una de la otra.
+
+\begin{lstlisting}[language=TypeScript, style=mystyle]
+  const horizontalRoute = function (ctx, x, y, amount) {
+    ctx.fillStyle = 'white';
+    for (let i = 0; i < amount; i++) {
+      ctx.fillRect(x + i * 16, y, 4, 4);
+    }
+  };
+
+  const verticalRoute = function (ctx, x, y, amount) {
+    ctx.fillStyle = 'white';
+    for (i = 0; i < amount; i++) {
+      ctx.fillRect(x, y + i * 16, 4, 4);
+    }
+  };
+\end{lstlisting}
+
+\hfill \textit{Fin del juego de \textbf{Pacman}}
+
+\vspace{10mm}
+\subsection{Objetos Path2D}
+Como hemos visto en el último ejemplo, puede haber una serie trazos y comandos de dibujo para dibujar objetos en su \code{canvas}. Para simplificar el código y mejorar el rendimiento, el objeto \textblue{Path2D}, disponible en las versiones recientes de los navegadores, le permite almacenar en caché o grabar estos comandos de dibujo. De este modo, se pueden reproducir los trazos rápidamente. Veamos cómo podemos construir un objeto \textblue{Path2D}:
+
+\begin{description}
+	\listCustom{Path2D():} El constructor \code{Path2D()} devuelve un objeto \textblue{Path2D} recién instanciado, opcionalmente con otra ruta como argumento (crea una copia), u opcionalmente con una cadena de caracteres formada por datos de un trazo \lineCode{SVG path}.
+\end{description}
+\vspace{0.5cm} % separación vertical
+
+\begin{lstlisting}[language=TypeScript, style=mystyle]
+  new Path2D(); // Objeto Path2D vacio
+  new Path2D(path); // Copia de otro objecto Path2D
+  new Path2D(d); // Path2D a partir de un trazo (SVG path)
+\end{lstlisting}
+\vspace{0.5cm} % separación vertical
+
+Todos los Métodos de trazo como \code{moveTo}, \code{rect}, \code{arc} o \code{quadraticCurveTo}, etc., que hemos conocido anteriormente, están disponibles en los objetos \textblue{Path2D}.
+
+La API \textblue{Path2D} también añade una forma de combinar trazados mediante el método \code{addPath}. Esto puede ser útil cuando se quiere construir objetos a partir de varios componentes, por ejemplo.
+
+\begin{description}
+	\listCustom{Path2D.addPath(path [, transform]):} Añade un trazo al trazo actual con una matriz de transformación opcional.
+\end{description}
+
+\newpage % saltar a la siguiente pagina
+\subsubsection{Ejemplo de Path2D}
+
+En este ejemplo, estamos creando un rectángulo y un círculo. Ambos se almacenan como un objeto \textblue{Path2D}, para que estén disponibles para su uso posterior. Con la nueva \textblue{API Path2D}, varios métodos se han actualizado para aceptar opcionalmente un objeto \textblue{Path2D} para utilizarlo en lugar del trazo actual. Aquí, \code{stroke} y \code{fill} se utilizan con un argumento de trazo para dibujar ambos objetos en el \code{canvas}, por ejemplo.
+
+\begin{lstlisting}[language=TypeScript, style=mystyle]
+  function draw() {
+    const canvas = document.getElementById("canvas");
+    if (canvas.getContext) {
+      const ctx = canvas.getContext("2d");
+
+      const rectangle = new Path2D();
+      rectangle.rect(10, 10, 50, 50);
+
+      const circle = new Path2D();
+      circle.arc(100, 35, 25, 0, 2 * Math.PI);
+
+      ctx.stroke(rectangle);
+      ctx.fill(circle);
+    }
+  }
+\end{lstlisting}
+
+El resultado se vería así.
+
+\vspace{0.3cm} % separación vertical
+\begin{center}
+	\begin{tikzpicture}
+		\draw (0,0) rectangle (2,2); % Cuadrado de esquina (0,0) a (2,2)
+		\fill (3.5, 1) circle (1);
+	\end{tikzpicture}
+\end{center}
+
+\subsubsection{Uso de trazados (SVG paths)}
+
+Otra poderosa característica de la nueva \textblue{API Path2D} del \code{canvas} es el uso de datos de trazados o \lineCode{SVG path} para inicializar los trazos en el \code{canvas}. Esto podría permitirle pasar los datos del trazo y reutilizarlos tanto en el \textblue{SVG} como en el \code{canvas}.
+
+El trazo se moverá al punto (\code{M10 10}) y luego se moverá horizontalmente \code{80} puntos a la derecha (\code{h 80}), luego \code{80} puntos hacia abajo (\code{v 80}), luego \code{80} puntos a la izquierda (\code{h -80}), y luego de vuelta al inicio (\code{z}).
+
+\vspace{0.5cm} % separación vertical
+Finalizaremos la sección \textblue{(2.2) Dibujando formas con canvas} con este ultimo ejemplo.
+
+\begin{lstlisting}[language=TypeScript, style=mystyle]
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+
+  let p = new Path2D("M10 10 h 80 v 80 h -80 Z");
+  ctx.fill(p);
+\end{lstlisting}
+
+\begin{center}
+	\begin{tikzpicture}
+		\fill (0,0) rectangle (2,2); % Cuadrado de esquina (0,0) a (2,2)
+	\end{tikzpicture}
+\end{center}
