@@ -1,0 +1,97 @@
+\usepackage[utf8]{inputenc} % Codificación de entrada
+\usepackage[spanish]{babel} % Idioma del documento
+
+\usepackage{geometry} % Configuración de márgenes
+\usepackage{titlesec} % Personalización de títulos
+\usepackage{lipsum} % Para generar texto de relleno, puedes eliminarlo
+\usepackage{parskip} % Arreglo de la tabulación en el documento
+\usepackage{lmodern} % Latin moderno
+\usepackage{xcolor, soul} % Para poder usar colores
+\usepackage{graphicx} % Imagenes
+\usepackage{listings} % Para usar el paquete listings y sintaxis de códigos
+
+% Configuración de márgenes
+\geometry{
+	left=2.0cm,
+	right=1.5cm,
+	top=1.5cm,
+	bottom=1.5cm
+}
+
+% Para que el texto sea mas bonito
+\renewcommand*{\familydefault}{\sfdefault}
+
+% Colores
+\definecolor{blue_lua}{RGB}{0, 153, 221} % Color personalizado para el Titulo
+\definecolor{base}{RGB}{48, 52, 70}
+\definecolor{pink}{RGB}{195, 66, 147}
+\definecolor{comment}{RGB}{118, 126, 152}
+\definecolor{flamingo}{RGB}{238, 190, 190}
+\definecolor{maroon}{RGB}{204, 133, 136}
+\definecolor{green}{RGB}{45, 194, 89}
+\definecolor{red}{RGB}{234, 53, 56}
+
+% Para insertar codigo en linea
+\newcommand{\textblue}[1]{\textcolor{blue_lua}{#1}}
+\newcommand{\textred}[1]{\textcolor{red}{#1}}
+\newcommand{\lineCode}[1]{\colorbox{gray!10}{\textcolor{black!80}{\texttt{#1}}}}
+
+% Configuración general para mostrar código
+\lstdefinestyle{badstyle}{
+	backgroundcolor=\color{red!5},
+	keywordstyle=\color{pink}, % Estilo para las palabras clave
+	commentstyle=\color{comment}\textit, % Estilo para los comentarios
+	stringstyle=\color{green}, % Estilo para las cadenas de texto
+	identifierstyle=\color{black!80},
+	basicstyle=\color{maroon}\ttfamily,
+	frame=none,
+	breakatwhitespace=false,
+	breaklines=true,
+	keepspaces=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=3,
+}
+
+\lstdefinestyle{goodstyle}{
+	backgroundcolor=\color{blue_lua!5},
+	keywordstyle=\color{pink}, % Estilo para las palabras clave
+	commentstyle=\color{comment}\textit, % Estilo para los comentarios
+	stringstyle=\color{green}, % Estilo para las cadenas de texto
+	identifierstyle=\color{black!80},
+	basicstyle=\color{maroon}\ttfamily,
+	frame=none,
+	breakatwhitespace=false,
+	breaklines=true,
+	keepspaces=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=3,
+}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{gray!7},
+	keywordstyle=\color{pink}, % Estilo para las palabras clave
+	commentstyle=\color{comment}\textit, % Estilo para los comentarios
+	stringstyle=\color{green}, % Estilo para las cadenas de texto
+	identifierstyle=\color{black!80},
+	basicstyle=\color{maroon}\ttfamily,
+	frame=none,
+	breakatwhitespace=false,
+	breaklines=true,
+	keepspaces=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=3,
+}
+
+\lstdefinelanguage{TypeScript}{
+	keywords={break, case, catch, class, const, continue, debugger, default, delete, do, else, enum, export, extends, false, finally, for, function, if, import, in, instanceof, new, null, return, super, switch, this, throw, true, try, typeof, var, void, while, with},
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	morestring=[b]",
+	morestring=[b]'
+}
