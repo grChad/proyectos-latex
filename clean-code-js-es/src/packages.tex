@@ -9,6 +9,7 @@
 \usepackage{xcolor, soul} % Para poder usar colores
 \usepackage{graphicx} % Imagenes
 \usepackage{listings} % Para usar el paquete listings y sintaxis de códigos
+\usepackage{fontawesome} % Para usar los iconos de FontAwesome
 
 % Configuración de márgenes
 \geometry{
@@ -30,9 +31,11 @@
 \definecolor{maroon}{RGB}{204, 133, 136}
 \definecolor{green}{RGB}{45, 194, 89}
 \definecolor{red}{RGB}{234, 53, 56}
+\definecolor{yellow}{RGB}{250, 200, 20}
 
 % Para insertar codigo en linea
 \newcommand{\textblue}[1]{\textcolor{blue_lua}{#1}}
+\newcommand{\textjs}[1]{\textcolor{yellow}{\textbf{#1}}}
 \newcommand{\textred}[1]{\textcolor{red}{#1}}
 \newcommand{\lineCode}[1]{\colorbox{gray!10}{\textcolor{black!80}{\texttt{#1}}}}
 
@@ -43,7 +46,7 @@
 	commentstyle=\color{comment}\textit, % Estilo para los comentarios
 	stringstyle=\color{green}, % Estilo para las cadenas de texto
 	identifierstyle=\color{black!80},
-	basicstyle=\color{maroon}\ttfamily,
+	basicstyle=\color{maroon}\ttfamily\small,
 	frame=none,
 	breakatwhitespace=false,
 	breaklines=true,
@@ -51,7 +54,7 @@
 	showspaces=false,
 	showstringspaces=false,
 	showtabs=false,
-	tabsize=3,
+	tabsize=2,
 }
 
 \lstdefinestyle{goodstyle}{
@@ -60,7 +63,7 @@
 	commentstyle=\color{comment}\textit, % Estilo para los comentarios
 	stringstyle=\color{green}, % Estilo para las cadenas de texto
 	identifierstyle=\color{black!80},
-	basicstyle=\color{maroon}\ttfamily,
+	basicstyle=\color{maroon}\ttfamily\small,
 	frame=none,
 	breakatwhitespace=false,
 	breaklines=true,
@@ -68,7 +71,7 @@
 	showspaces=false,
 	showstringspaces=false,
 	showtabs=false,
-	tabsize=3,
+	tabsize=2,
 }
 
 \lstdefinestyle{mystyle}{
@@ -77,7 +80,7 @@
 	commentstyle=\color{comment}\textit, % Estilo para los comentarios
 	stringstyle=\color{green}, % Estilo para las cadenas de texto
 	identifierstyle=\color{black!80},
-	basicstyle=\color{maroon}\ttfamily,
+	basicstyle=\color{maroon}\ttfamily\small,
 	frame=none,
 	breakatwhitespace=false,
 	breaklines=true,
@@ -85,7 +88,7 @@
 	showspaces=false,
 	showstringspaces=false,
 	showtabs=false,
-	tabsize=3,
+	tabsize=2,
 }
 
 \lstdefinelanguage{TypeScript}{

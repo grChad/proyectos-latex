@@ -1,0 +1,75 @@
+\section{Clases}
+
+\subsection*{Prefiere ES2015/ES6 clases en vez de funciones normales de ES5}
+
+Es muy difícil para obtener una herencia legible de las clases, las construcción y las definiciones de los métodos para las clases de ES5. Si necesitas la herencia (y puede que no la vayas a necesitar), entonces prefiere a las clases de ES2015/ES6. Sin embargo, prefiere funciones pequeñas hasta que necesites objetos más grandes y complejos.
+
+Mal Hecho:
+
+\begin{lstlisting}[language=TypeScript, style=badstyle]
+ const Animal = function(age) {
+   if (!(this instanceof Animal)) {
+     throw new Error('Instantiate Animal with `new`');
+   }
+
+   this.age = age;
+ };
+
+ Animal.prototype.move = function move() {};
+
+ const Mammal = function(age, furColor) {
+   if (!(this instanceof Mammal)) {
+     throw new Error('Instantiate Mammal with `new`');
+   }
+
+   Animal.call(this, age);
+   this.furColor = furColor;
+ };
+
+ Mammal.prototype = Object.create(Animal.prototype);
+ Mammal.prototype.constructor = Mammal;
+ Mammal.prototype.liveBirth = function liveBirth() {};
+
+ const Human = function(age, furColor, languageSpoken) {
+   if (!(this instanceof Human)) {
+     throw new Error('Instantiate Human with `new`');
+   }
+
+   Mammal.call(this, age, furColor);
+   this.languageSpoken = languageSpoken;
+ };
+
+ Human.prototype = Object.create(Mammal.prototype);
+ Human.prototype.constructor = Human;
+ Human.prototype.speak = function speak() {};
+\end{lstlisting}
+\newpage
+
+Bien Hecho:
+\begin{lstlisting}[language=TypeScript, style=goodstyle]
+ class Animal {
+   constructor(age) {
+     this.age = age;
+   }
+
+   move() { /* ... */ }
+ }
+
+ class Mammal extends Animal {
+   constructor(age, furColor) {
+     super(age);
+     this.furColor = furColor;
+   }
+
+   liveBirth() { /* ... */ }
+ }
+
+ class Human extends Mammal {
+   constructor(age, furColor, languageSpoken) {
+     super(age, furColor);
+     this.languageSpoken = languageSpoken;
+   }
+
+   speak() { /* ... */ }
+ }
+\end{lstlisting}

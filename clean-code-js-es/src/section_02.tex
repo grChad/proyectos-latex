@@ -1,0 +1,153 @@
+\section{Variables}
+
+\subsection*{Utiliza nombres significativos y pronunciables para las variables}
+
+Mal Hecho:
+\begin{lstlisting}[language=TypeScript, style=badstyle]
+ const yyyymmdstr = moment().format('YYYY/MM/DD');
+\end{lstlisting}
+\vspace{0.5cm} % space
+
+Bien Hecho:
+\begin{lstlisting}[language=TypeScript, style=goodstyle]
+ const fechaActual = moment().format('YYYY/MM/DD');
+\end{lstlisting}
+
+\subsection*{Utiliza el vocabulario igual para las variables del mismo tipo}
+
+Mal Hecho:
+\begin{lstlisting}[language=TypeScript, style=badstyle]
+ conseguirInfoUsuario();
+ conseguirDataDelCliente();
+ conseguirRecordDelCliente();
+\end{lstlisting}
+\vspace{0.5cm} % space
+
+Bien Hecho:
+\begin{lstlisting}[language=TypeScript, style=goodstyle]
+ conseguirUsuario();
+\end{lstlisting}
+
+\subsection*{Utiliza nombres buscables}
+
+Nosotros leemos mucho más código que jamás escribiremos. Es importante que el código que escribimos sea legible y buscable. Cuando faltamos nombrar a las variables de manera buscable y legible, acabamos confundiendo a nuestros lectores. Echa un vistazo a las herramientas para ayudarte: \textblue{\underline{buddy.js}} y \textblue{\underline{ESLint}}.
+
+Mal Hecho:
+\begin{lstlisting}[language=TypeScript, style=badstyle]
+ // Para que rayos sirve 86400000?
+ setTimeout(hastaLaInfinidadYMasAlla, 86400000);
+\end{lstlisting}
+\vspace{0.5cm} % space
+
+Bien Hecho:
+\begin{lstlisting}[language=TypeScript, style=goodstyle]
+ // Declaralos como variables globales de 'const'.
+ const MILISEGUNDOS_EN_UN_DIA = 8640000;
+
+ setTimeout(hastaLaInfinidadYMasAlla, MILISEGUNDOS_EN_UN_DIA);
+\end{lstlisting}
+
+\newpage
+
+\subsection*{Utiliza variables explicativas}
+
+Mal Hecho:
+\begin{lstlisting}[language=TypeScript, style=badstyle]
+ const direccion = 'One Infinite Loop, Cupertino 95014';
+ const codigoPostalRegex = /^[^,\\]+[,\\\s]+(.+?)\s*(\d{5})?$/;
+ saveCityZipCode(direccion.match(codigoPostalRegex)[1], direccion.match(codigoPostalRegex)[2]);
+\end{lstlisting}
+\vspace{0.5cm} % space
+
+Bien Hecho:
+\begin{lstlisting}[language=TypeScript, style=goodstyle]
+ const direccion = 'One Infinite Loop, Cupertino 95014';
+ const codigoPostalRegex = /^[^,\\]+[,\\\s]+(.+?)\s*(\d{5})?$/;
+ const [, ciudad, codigoPostal] = direccion.match(codigoPostalRegex) || [];
+ guardarcodigoPostal(ciudad, codigoPostal);
+\end{lstlisting}
+
+\subsection*{Evitar el mapeo mental}
+
+El explícito es mejor que el implícito.
+
+Mal Hecho:
+\begin{lstlisting}[language=TypeScript, style=badstyle]
+ const ubicaciones = ['Austin', 'New York', 'San Francisco'];
+ ubicaciones.forEach((u) => {
+   hazUnaCosa();
+   hasMasCosas()
+   // ...
+   // ...
+   // ...
+   // Espera, para que existe la 'u'?
+   ejecuta(u);
+ });
+\end{lstlisting}
+\vspace{0.5cm} % space
+
+Bien Hecho:
+\begin{lstlisting}[language=TypeScript, style=goodstyle]
+ const ubicaciones = ['Austin', 'New York', 'San Francisco'];
+ ubicaciones.forEach((ubicacion) => {
+   hazUnaCosa();
+   hazMasCosas()
+   // ...
+   // ...
+   // ...
+   ejecuta(ubicacion);
+ });
+\end{lstlisting}
+
+\newpage
+
+\subsection*{No incluyas contexto innecesario}
+
+Si el nombre de tu clase/objeto te dice algo, no lo repitas de nuevo en el nombre de variable.
+
+Mal Hecho:
+\begin{lstlisting}[language=TypeScript, style=badstyle]
+ const Coche = {
+   cocheMarca: 'Honda',
+   cocheModelo: 'Accord',
+   cocheColor: 'Blue'
+ };
+
+ function pintarCoche(coche) {
+   coche.cocheColor = 'Red';
+ }
+\end{lstlisting}
+\vspace{0.5cm} % space
+
+Bien Hecho:
+\begin{lstlisting}[language=TypeScript, style=goodstyle]
+ const Coche = {
+   marca: 'Honda',
+   modelo: 'Accord',
+   color: 'Blue'
+ };
+
+ function pintarCoche(coche) {
+   coche.color = 'Red';
+ }
+\end{lstlisting}
+
+\subsection*{Utiliza argumentos predefinidos en vez de utilizar condicionales}
+
+Los argumentos predefinidos muchas veces son más organizados que utilizar los condicionales. Se consciente que si tú los usas, tu función sólo tendrá valores para los argumentos de \lineCode{undefined}. Los demás valores de 'falso' como \lineCode{\textquotesingle\textquotesingle}, \lineCode{\textquotedblright\textquotedblright}, \lineCode{false}, \lineCode{null}, \lineCode{0} y \lineCode{NaN}, no se reemplazan con un valor predefinido.
+
+Mal Hecho:
+\begin{lstlisting}[language=TypeScript, style=badstyle]
+ function crearEmpresa(nombre) {
+   const nombreEmpresa = nombre || 'Tacos S.A';
+   // ...
+ }
+\end{lstlisting}
+\vspace{0.5cm} % space
+
+Bien Hecho:
+\begin{lstlisting}[language=TypeScript, style=goodstyle]
+ function crearEmpresa(nombreEmpresa = 'Tacos S.A') {
+   // ...
+ }
+\end{lstlisting}
